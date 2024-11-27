@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('image_id');
             $table->string('image');
             $table->json('transformate');
+            $table->string('ip_address');
+            $table->string('browser');
             $table->timestamps();
+
             $table->foreign('image_id')->references('id')->on('images');
         });
     }
