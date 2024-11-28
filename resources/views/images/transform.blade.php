@@ -13,13 +13,20 @@
                 </div>
 
                 <!-- Image Upload and Preview -->
+                <form action="{{ route('transformation.transform') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
                 <div class="mb-4">
                     <label for="image-upload" class="block text-sm font-medium text-gray-700">Upload Image</label>
-                    <input type="file" id="image-upload" class="mt-1 block w-full" accept="image/*" onchange="previewImage(event)">
+                    <input type="file" id="image-upload" name="image" class="mt-1 block w-full" accept="image/*" onchange="previewImage(event)">
                     <div class="mt-4">
                         <img id="image-preview" class="max-w-full h-auto" style="display:none;">
                     </div>
                 </div>
+                <div class="mb-4">
+                    <button id="resize-btn" class="inline-flex items-center px-4 py-2 bg-blue-800  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">submit</button>
+                </div>
+              </form>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap gap-2">

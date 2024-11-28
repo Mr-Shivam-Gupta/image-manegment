@@ -10,7 +10,7 @@ class imgContoller extends Controller
 {
     public function index(Request $request)
     {
-        $images = image::all();
+        $images = image::where('user_id',$request->user()->id)->get();
         return view('images.index', [
             'user' => $request->user(),
             'images' => $images
@@ -70,10 +70,15 @@ class imgContoller extends Controller
     public function edit(Request $request, string $id){
 
         $image = image::findOrFail($id);
-        return view('images.edit', [
-            'user' => $request->user(),
-            'image'=> $image,
-        ]);
+        if($image->user_id == $request->user()->id){
+
+            return view('images.edit', [
+                'user' => $request->user(),
+                'image'=> $image,
+            ]);
+        }else{
+            return back()->with('error','access not allowed!');
+        }
     }
 
     public function update(Request $request, string $id){

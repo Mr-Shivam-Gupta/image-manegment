@@ -38,18 +38,21 @@
                             <td class="border border-gray-300 px-4 py-2">{{$image->user_id}}</td>
                             <td class="border border-gray-300 px-4 py-2">{{$image->ip_address}}</td>
                             <td class="border border-gray-300 px-4 py-2">{{$image->browser}}</td>
-                            <td class="border border-gray-300 px-4 py-2 inline-flex gap-2">
-                                <a href="{{ route('transformation.create',$image->id)}}" class="inline-flex items-center px-4 py-2 bg-green-800  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">Transform</a>
-                                <a href="{{ route('images.edit',$image->id)}}" class="inline-flex items-center px-4 py-2 bg-blue-800  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">Edit</a>
+                            <td class="border border-gray-300 px-4 py-2 ">
+                                <div class="inline-flex gap-2">
 
-                                <form action="{{ route('images.destroy',$image->id)}}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="inline-block items-center px-4 py-2 bg-red-600  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                        Delete
-                                    </button>
-                                </form>
+                                    <a href="{{ route('transformation.create',$image->id)}}" class="inline-flex items-center px-4 py-2 bg-green-800  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">Transform</a>
+                                    <a href="{{ route('images.edit',$image->id)}}" class="inline-flex items-center px-4 py-2 bg-blue-800  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">Edit</a>
+    
+                                    <form action="{{ route('images.destroy',$image->id)}}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-block items-center px-4 py-2 bg-red-600  border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
 

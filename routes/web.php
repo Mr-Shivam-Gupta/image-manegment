@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transform', [transformController::class, 'index'])->name('transformation.index');
     Route::get('/transform/{id}/create', [transformController::class, 'create'])->name('transformation.create');
+    Route::post('/transform/create', [transformController::class, 'transform'])->name('transformation.transform');
+    // Route::match(['post', 'put'],'/transform/{id?}/create', [transformController::class, 'transform'])->name('transformation.transform');
+
 
 
 
