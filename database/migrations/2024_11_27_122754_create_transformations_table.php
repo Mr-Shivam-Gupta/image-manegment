@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transformations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('users_id');
             $table->string('image');
             $table->json('transformate');
             $table->string('ip_address');
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('image_id')->references('id')->on('images');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
