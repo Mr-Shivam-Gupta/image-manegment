@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('image');
+            $table->string('description');
             $table->json('mata_data');
             $table->string('ip_address');
             $table->string('browser');

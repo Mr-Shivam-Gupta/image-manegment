@@ -16,14 +16,22 @@
                 <form action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    <!-- Image Upload -->
-                    <div class="mb-6">
-                        <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
-                        <input type="file" id="image" name="image" accept="image/*" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                        @error('image')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="mb-6">
+                            <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+                            <input type="file" id="image" name="image" accept="image/*" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                            @error('image')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-6 hidden">
+                            <label for="image" class="block text-sm font-medium text-gray-700">Image Privew</label>
+                            <img src="" alt="User Image" class="w-20 h-20 rounded-full">
+                        </div>
+
+                   </div>
 
                     <!-- Description -->
                     <div class="mb-6">
@@ -36,7 +44,7 @@
 
                     <!-- Submit Button -->
                     <div class="mb-6">
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 border  rounded-md font-semibold text-xs text-blue uppercase tracking-widest hover:bg-blue-700  focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 border  rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700  focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Save Image
                         </button>
                     </div>

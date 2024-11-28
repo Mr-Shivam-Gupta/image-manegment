@@ -13,5 +13,6 @@ class image extends Model
         'mata_data',
         'ip_address',
         'browser',
+        'description'
     ];
 }
