@@ -15,4 +15,5 @@ class image extends Model
         'browser',
         'description'
     ];
+
 }
