@@ -23,6 +23,9 @@
                    <input type="hidden" name="flip_vertical" id="flip_vertical" value="false">
                    <input type="hidden" name="resize_width" id="resize_width" value="">
                    <input type="hidden" name="resize_height" id="resize_height" value="">
+                   <input type="hidden" name="resize" id="resize" value="">
+                   <input type="hidden" name="extension" id="extension" value="">
+                   <input type="hidden" name="filter" id="filter" value="">
 
                    <input type="hidden" name="water_mark" id="water_mark" value="">
                    <!-- Hidden field for crop data -->
@@ -48,10 +51,10 @@
                 <button class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-200" onclick="showWatermark()">
                 <a href="#">Watermark</a>
                 </button>
-                <button class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200">
-                <a href="#">Compress</a>
+                <button class="bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition duration-200" onclick="showExtension()">
+                <a href="#">Extension</a>
                 </button>
-                <button class="bg-pink-500 text-white py-2 px-4 rounded hover:bg-pink-600 transition duration-200">
+                <button class="bg-pink-500 text-white py-2 px-4 rounded hover:bg-pink-600 transition duration-200" onclick="showFilter()">
                 <a href="#">Filter</a>
                 </button>
              </div>
@@ -71,9 +74,41 @@
              </div>
                 <div id="watermark-section" class="mt-4 mb-4 flex  w-max gap-2 hidden">
                   <label class="flex items-center gap-2">Text:</label>
-                   <input type="text" id="watermark" class="px-2 py-1 border rounded" maxlength="10" placeholder="Enter watermark content"  />
+                   <input type="text" id="watermark" class="px-2 py-1 border rounded"  placeholder="Enter watermark content"  />
                    <p class="text-red-500 text-sm mt-2">Note: Use crop grid to place the text, defult will be x-100, y-100 base point.</p>
                 </div>
+                <div id="extension-section" class="mt-4 mb-4 flex w-max gap-2 hidden">
+                    <label for="extension-select" class="flex items-center gap-2">Change Extension:</label>
+                    <select id="extension-select" class="px-5 py-1 border rounded">
+                        <option value="">Select Formate</option>
+                        <option value="png">PNG</option>
+                        <option value="jpg">JPG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="webp">WEBP</option>
+                    </select>
+                </div>
+                <div id="filter-section" class="mt-4 mb-4 flex w-max gap-2 hidden">
+                    <label for="filter-select" class="flex items-center gap-2">Apply Filter:</label>
+                    <select id="filter-select" class="px-5 py-1 border rounded">
+                        <option value="">Select Filter</option>
+
+                        <option value="grayscale">Grayscale</option>
+                        <option value="invert">Invert</option>
+                        <option value="gamma">Gamma Correction</option>
+                        <option value="reduce-colors">Reduce Colors</option>
+
+                        <!-- Brightness and Contrast -->
+                        <option value="brightness">Increase Brightness</option>
+                        <option value="contrast-increasing">Increase Contrast</option>
+                        <option value="contrast-decreasing">Decrease Contrast</option>
+
+                        <!-- Image Effects -->
+                        <option value="blur">Blur</option>
+                        <option value="pixelate">Pixelate</option>
+                        <option value="sharpening">Sharpen</option>
+                    </select>
+                 </div>
+
 
              </div>
           </div>
@@ -148,16 +183,16 @@
        document.getElementById('rotate-left').addEventListener('click', () => {
            if (cropper) {
                let currentRotateValue = parseInt(document.getElementById('rotate').value) || 0; // Get current value or default to 0
-               let newRotateValue = currentRotateValue + 10; // Decrease by 10 degrees
-               cropper.rotate(-10); // Rotate the image 10 degrees counterclockwise
+               let newRotateValue = currentRotateValue + 90; // Decrease by 10 degrees
+               cropper.rotate(-90); // Rotate the image 10 degrees counterclockwise
                document.getElementById('rotate').value = newRotateValue;
            }
        });
        document.getElementById('rotate-right').addEventListener('click', () => {
            if (cropper) {
                let currentRotateValue = parseInt(document.getElementById('rotate').value) || 0; // Get current value or default to 0
-               let newRotateValue = currentRotateValue - 10; // Increase by 10 degrees
-               cropper.rotate(10); // Rotate the image 10 degrees clockwise
+               let newRotateValue = currentRotateValue - 90; // Increase by 10 degrees
+               cropper.rotate(90); // Rotate the image 10 degrees clockwise
                document.getElementById('rotate').value = newRotateValue; // Set the rotate field value
            }
        });
@@ -176,22 +211,54 @@
            }
        });
        function showRotateFlip() {
+           document.getElementById('resize').value = 0;
            document.getElementById('resize-section').classList.add('hidden');
            document.getElementById('watermark-section').classList.add('hidden');
            document.getElementById('rotate-flip-section').classList.remove('hidden');
        }
        function showResize(){
+
+           document.getElementById('resize').value = 1;
+
            document.getElementById('rotate-flip-section').classList.add('hidden');
            document.getElementById('watermark-section').classList.add('hidden');
            document.getElementById('resize-section').classList.remove('hidden');
 
        }
        function showWatermark(){
+        document.getElementById('resize').value = 0;
            document.getElementById('rotate-flip-section').classList.add('hidden');
            document.getElementById('resize-section').classList.add('hidden');
            document.getElementById('watermark-section').classList.remove('hidden');
 
        }
+       function showExtension() {
+    document.getElementById('resize').value = 0;
+    document.getElementById('rotate-flip-section').classList.add('hidden');
+    document.getElementById('resize-section').classList.add('hidden');
+    document.getElementById('watermark-section').classList.add('hidden');
+    document.getElementById('extension-section').classList.remove('hidden');
+}
+
+// Update the hidden input value when the dropdown changes
+document.getElementById('extension-select').addEventListener('change', function () {
+    document.getElementById('extension').value = this.value;
+});
+
+function showFilter() {
+    document.getElementById('resize').value = 0;
+    document.getElementById('rotate-flip-section').classList.add('hidden');
+    document.getElementById('resize-section').classList.add('hidden');
+    document.getElementById('watermark-section').classList.add('hidden');
+    document.getElementById('extension-section').classList.add('hidden');
+    document.getElementById('filter-section').classList.remove('hidden');
+}
+
+
+document.getElementById('filter-select').addEventListener('change', function () {
+    document.getElementById('filter').value = this.value;
+});
+
 
 
 
